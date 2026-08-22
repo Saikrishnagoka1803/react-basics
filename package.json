@@ -19,11 +19,16 @@
   "license": "ISC",
   "author": "sai krishna goka",
   "type": "commonjs",
-  "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "devDependencies": {
     "parcel": "^2.16.4"
-  }
+  },
+  "dependencies": {
+    "react": "^19.2.8"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
 }
