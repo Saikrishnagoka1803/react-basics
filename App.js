@@ -1,6 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Header from "./components/Header.jsx";
+import RestaurantContainer from "./components/RestaurantContainer.jsx";
 
-const reactelement = React.createElement('h2', {id:"child"}, 'hello I am from react emoji 🚀');
-const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(reactelement);
+const App = () => {
+  return (
+    <div className="mission-heading">
+      <p>This is a food delivery app </p>
+      <Header />
+      <RestaurantContainer />
+    </div>
+  );
+};
+
+export default App;

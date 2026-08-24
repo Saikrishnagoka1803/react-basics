@@ -20,6 +20,8 @@
   "author": "sai krishna goka",
   "type": "commonjs",
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "devDependencies": {
