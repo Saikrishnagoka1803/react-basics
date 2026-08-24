@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header.jsx";
-import RestaurantContainer from "./components/RestaurantContainer.jsx";
+import Header from "./src/components/Header.jsx";
+import RestaurantContainer from "./src/components/RestaurantContainer.jsx";
 
 const App = () => {
   return (

@@ -1,10 +1,11 @@
+import { CARD_IMAGE_URL } from './utils/constants.js'
 
 const RestoCard = () => {
     return (
         <div className="card">
             <img
                 className="card-img-top"
-                src={"https://picsum.photos/300/200"}
+                src={CARD_IMAGE_URL}
                 alt="Card image cap"
             />
             <div className="card-body">

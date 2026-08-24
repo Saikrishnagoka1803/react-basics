@@ -33,8 +33,9 @@
     width: stretch;
     height: 33px;
   }
-  #resto-cards{
+  #resto-cards {
     display: flex;
+    flex-wrap: wrap;
   }
   .card {
     width: 220px;
