@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "react": "^19.2.8",
-    "react-router-dom": "^7.18.2"
+    "react-router-dom": "^6.30.6"
   },
   "browserslist": [
     "last 2 versions"
