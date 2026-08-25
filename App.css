@@ -22,6 +22,7 @@
   #nav-items > ul > li {
     list-style: none;
     margin-right: 25px;
+    cursor: pointer;
   }
   #restaurant-container {
     text-align: left;
