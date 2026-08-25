@@ -51,3 +51,9 @@
     font-size: 15px;
   }
 }
+.footer {
+  text-align: center;
+  font-size: 20px;
+  color: blue;
+  background-color: lightgrey;
+}
