@@ -1,21 +1,26 @@
-import { CARD_IMAGE_URL } from './utils/constants.js'
+import { GET_RESTO_IMG } from './utils/constants.js'
 
-const RestoCard = () => {
+const RestoCard = ({ restaurantInfo }) => {
     return (
         <div className="card">
             <img
                 className="card-img-top"
-                src={CARD_IMAGE_URL}
+                src={GET_RESTO_IMG + restaurantInfo.cloudinaryImageId}
                 alt="Card image cap"
             />
             <div className="card-body">
-                <h5 className="card-title">Card title</h5>
+                <h5 className="card-title">{restaurantInfo.name}</h5>
                 <p className="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    {restaurantInfo.description}
+                </p>
+                <p className="card-text">
+                    {restaurantInfo.cuisines.join(", ")}
+                </p>
+                <p className="card-text">
+                     {restaurantInfo.totalRatingsString}
                 </p>
                 <a href="#" className="btn btn-primary">
-                    Go somewhere
+                    {restaurantInfo.avgRating} stars,
                 </a>
             </div>
         </div>

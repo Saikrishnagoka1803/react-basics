@@ -3,41 +3,60 @@ import RestoCard from './RestoCard.jsx'
 
 const RestaurantContainer = () => {
 
-    const [response, setResponse] = useState([])
+    const [allRestaurants, setAllRestaurants] = useState([])
+    const [searchText, setSearchText] = useState("")
+    const [showTopRated, setShowTopRated] = useState(false)
+
+    const fetchData = async () => {
+        try {
+            const resp = await fetch(`https://corsproxy.io/?key=292c3d35&url=${encodeURIComponent("https://namastedev.com/api/v1/listRestaurants")}`)
+            if (!resp.ok) {
+                throw new Error(`HTTP error: ${resp.status}`);
+            }
+            const json = await resp.json();
+            const restaurants = json?.data?.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+            setAllRestaurants(restaurants);
+        }
+        catch (error) {
+            console.log("Error fetching data:", error);
+        }
+    }
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const data = await fetch('https://namastedev.com/api/v1/listRestaurants')
-                if (data) {
-                    const dataJSON = await data.json()
-                    setResponse(dataJSON?.data.data.data)
-                    console.log(" fetched data ", response)
-                }
-
-            }
-            catch (err) {
-                console.log(err)
-            }
-
-        }
-        getData();
+        fetchData();
     }, [])
+
+    const filteredRestaurants = allRestaurants.filter((Restaurant) => {
+        const name = Restaurant?.info?.name.toLowerCase();
+        const cuisines = Restaurant?.info?.cuisines.join(", ").toLowerCase();
+        const matchSearch = name.includes(searchText.toLowerCase()) || cuisines.includes(searchText.toLowerCase());
+        const matchRating = showTopRated ? Restaurant?.info?.avgRating > 4.5 : true;
+        return matchSearch && matchRating;
+    });
 
     return (
         <div id="restaurant-container">
 
-            <input type="search" placeholder="start searching ..."></input>
+            <input
+                type="search"
+                placeholder="start searching ..."
+                value={searchText}
+                onChange={(e) => {
+                    setSearchText(e.target.value)
+                }}
+            />
             <button id='search-button' onClick={() => {
-                console.log("Hey Iam clicked")
-            }}> click to filter </button>
+                setShowTopRated(!showTopRated)
+            }}> {showTopRated ? "Show All Restaurants" : "Show Top Rated"} </button>
             <div id="resto-cards">
                 {
-                    [].map((each) => {
-                        return (<>
-                            <RestoCard />
-                        </>)
-                    })
+                    filteredRestaurants.length === 0 ? (
+                        <p>No restaurants found matching your search.</p>
+                    ) : (
+                        filteredRestaurants.map((each, index) => {
+                            return <RestoCard key={each.info.id} restaurantInfo={each.info} />
+                        })
+                    )
                 }
             </div>
         </div>
