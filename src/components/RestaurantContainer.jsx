@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import RestoCard from './RestoCard.jsx'
+import { FETCH_ALL_RESTAURANTS_URL} from './utils/constants.js'
 
 const RestaurantContainer = () => {
 
@@ -9,7 +10,7 @@ const RestaurantContainer = () => {
 
     const fetchData = async () => {
         try {
-            const resp = await fetch(`https://corsproxy.io/?key=292c3d35&url=${encodeURIComponent("https://namastedev.com/api/v1/listRestaurants")}`)
+            const resp = await fetch(`https://corsproxy.io/?key=292c3d35&url=${encodeURIComponent(FETCH_ALL_RESTAURANTS_URL)}`)
             if (!resp.ok) {
                 throw new Error(`HTTP error: ${resp.status}`);
             }

@@ -1,4 +1,5 @@
-import { CARD_IMAGE_URL, fixNoImage } from './utils/constants.js'
+import { CARD_IMAGE_URL, fixNoImage } from './utils/constants.js';
+import { Link } from 'react-router-dom'
 
 const RestoCard = ({ restaurantInfo }) => {
     return (
@@ -23,9 +24,14 @@ const RestoCard = ({ restaurantInfo }) => {
                 <p className="card-text">
                     {restaurantInfo.totalRatingsString}
                 </p>
-                <a href="#" className="btn btn-primary">
+                <p href="#" className="btn btn-primary">
                     {restaurantInfo.avgRating} stars,
-                </a>
+                </p>
+                <Link to={`/listRestaurantMenu/${restaurantInfo.id}`}>
+                    <button className="btn btn-primary" style={{ cursor: 'pointer' }}>
+                        viewMenu
+                    </button>
+                </Link>
             </div>
         </div>
     );
