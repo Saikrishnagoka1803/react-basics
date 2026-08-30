@@ -1,31 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import RestoCard from './RestoCard.jsx'
-import { FETCH_ALL_RESTAURANTS_URL} from './utils/constants.js'
+import useOnlineStatus from './utils/useOnlineStatus.js';
+import useListRestaurants from './utils/useListRestaurants.js';
 
 const RestaurantContainer = () => {
 
-    const [allRestaurants, setAllRestaurants] = useState([])
     const [searchText, setSearchText] = useState("")
     const [showTopRated, setShowTopRated] = useState(false)
 
-    const fetchData = async () => {
-        try {
-            const resp = await fetch(`https://corsproxy.io/?key=292c3d35&url=${encodeURIComponent(FETCH_ALL_RESTAURANTS_URL)}`)
-            if (!resp.ok) {
-                throw new Error(`HTTP error: ${resp.status}`);
-            }
-            const json = await resp.json();
-            const restaurants = json?.data?.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
-            setAllRestaurants(restaurants);
-        }
-        catch (error) {
-            console.log("Error fetching data:", error);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const isOnline = useOnlineStatus();
+    const allRestaurants = useListRestaurants();
 
     const filteredRestaurants = allRestaurants.filter((Restaurant) => {
         const name = Restaurant?.info?.name.toLowerCase();
@@ -34,6 +18,10 @@ const RestaurantContainer = () => {
         const matchRating = showTopRated ? Restaurant?.info?.avgRating > 4.5 : true;
         return matchSearch && matchRating;
     });
+
+    if (!isOnline) {
+        return <h1>🔴 You are offline. Please check your internet connection.</h1>
+    }
 
     return (
         <div id="restaurant-container">
