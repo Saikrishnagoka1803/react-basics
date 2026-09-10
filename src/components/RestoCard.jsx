@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const RestoCard = ({ restaurantInfo }) => {
     return (
-        <div className="card">
+        <div className="w-2/12 m-4 p-4 border border-gray rounded-xl bg-gray-100">
             <img
-                className="card-img-top"
+                className="w-full h-auto rounded-xl"
                 src={fixNoImage(restaurantInfo.cloudinaryImageId)}
                 alt="Card image cap"
                 onError={(e) => {
@@ -13,8 +13,8 @@ const RestoCard = ({ restaurantInfo }) => {
                     e.target.src = CARD_IMAGE_URL;
                 }}
             />
-            <div className="card-body">
-                <h5 className="card-title">{restaurantInfo.name}</h5>
+            <div className="mt-2">
+                <h5 className="font-bold text-lg">{restaurantInfo.name}</h5>
                 <p className="card-text">
                     {restaurantInfo.description}
                 </p>
@@ -28,7 +28,7 @@ const RestoCard = ({ restaurantInfo }) => {
                     {restaurantInfo.avgRating} stars,
                 </p>
                 <Link to={`/listRestaurantMenu/${restaurantInfo.id}`}>
-                    <button className="btn btn-primary" style={{ cursor: 'pointer' }}>
+                    <button className="bg-green-100 rounded-md p-2 mt-2 border border-gray" style={{ cursor: 'pointer' }}>
                         viewMenu
                     </button>
                 </Link>

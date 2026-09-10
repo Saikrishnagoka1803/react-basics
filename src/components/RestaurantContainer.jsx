@@ -24,20 +24,24 @@ const RestaurantContainer = () => {
     }
 
     return (
-        <div id="restaurant-container">
+        <div id="gap-4 p-4 m-4">
 
-            <input
-                type="search"
-                placeholder="start searching ..."
-                value={searchText}
-                onChange={(e) => {
-                    setSearchText(e.target.value)
-                }}
-            />
-            <button id='search-button' onClick={() => {
-                setShowTopRated(!showTopRated)
-            }}> {showTopRated ? "Show All Restaurants" : "Show Top Rated"} </button>
-            <div id="resto-cards">
+            <div className="flex gap-4 p-4 m-4 ">
+                <input
+                    className="border border-gray rounded-xl p-2 w-6/12"
+                    type="search"
+                    placeholder="start searching ..."
+                    value={searchText}
+                    onChange={(e) => {
+                        setSearchText(e.target.value)
+                    }}
+                />
+                <button id='search-button' className="bg-green-100 rounded-xl p-2 w-2/12" onClick={() => {
+                    setShowTopRated(!showTopRated)
+                }}> {showTopRated ? "Show All Restaurants" : "Show Top Rated"} </button>
+            </div>
+
+            <div id="flex" className="flex flex-wrap gap-4">
                 {
                     filteredRestaurants.length === 0 ? (
                         <p>No restaurants found matching your search.</p>

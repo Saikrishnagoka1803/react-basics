@@ -12,7 +12,7 @@ const useEachRestaurant = (RestoId) => {
         throw new Error(`HTTP error: ${resp.status}`);
       }
       const json = await resp.json();
-      setRestaurantData(json.data.cards[2].card.card.info);
+      setRestaurantData(json.data.cards);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -22,7 +22,7 @@ const useEachRestaurant = (RestoId) => {
     getEachRestaurantData(RestoId);
   }, []);
 
-  return restaurantData;
+  return { restaurantData };
 };
 
 export default useEachRestaurant;
